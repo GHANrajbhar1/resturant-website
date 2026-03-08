@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: spiceroot-restaurant
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.20.0
+      - key: DB_FILE
+        value: /var/data/spiceroot.db
+      - key: PORT
+        value: 10000
+      - key: PUBLIC_BASE_URL
+        sync: false
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CONTACT_RECEIVER_EMAIL
+        sync: false
+      - key: UPI_VPA
+        sync: false
+      - key: UPI_NAME
+        sync: false
+    disk:
+      name: spiceroot-data
+      mountPath: /var/data
+      sizeGB: 1

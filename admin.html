@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpiceRoot Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            admin: {
+              500: "#0ea5e9",
+              700: "#0369a1"
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <main class="mx-auto max-w-7xl p-4 sm:p-6">
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+      <h1 class="text-3xl font-semibold">SpiceRoot Admin Panel</h1>
+      <a href="/index.html" class="rounded border border-white/20 px-4 py-2 text-sm hover:bg-white/10">Back to Website</a>
+    </div>
+
+    <section class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+      <div class="grid gap-3 lg:grid-cols-2">
+        <div>
+          <label class="text-sm text-slate-300" for="adminUsername">Admin Username</label>
+          <input id="adminUsername" class="mt-1 w-full rounded border border-white/20 bg-slate-950 px-3 py-2" placeholder="owner / manager / staff user" />
+        </div>
+        <div>
+          <label class="text-sm text-slate-300" for="adminPassword">Admin Password</label>
+          <input id="adminPassword" type="password" class="mt-1 w-full rounded border border-white/20 bg-slate-950 px-3 py-2" placeholder="Password" />
+        </div>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button id="loginBtn" class="rounded bg-admin-500 px-4 py-2 font-semibold hover:bg-admin-700">Login</button>
+        <button id="logoutBtn" class="rounded border border-white/20 px-4 py-2 text-sm hover:bg-white/10">Logout</button>
+        <button id="loadBtn" class="rounded border border-admin-500/60 px-4 py-2 text-sm font-semibold text-admin-500 hover:bg-admin-500/10">Load Data</button>
+      </div>
+      <p class="mt-2 text-xs text-slate-400">Fallback: Agar login users configured nahi hain to legacy key mode me ADMIN_API_KEY use hoga.</p>
+      <div class="mt-2">
+        <label class="text-xs text-slate-400" for="adminKey">Legacy Admin Key (optional)</label>
+        <input id="adminKey" class="mt-1 w-full rounded border border-white/20 bg-slate-950 px-3 py-2 text-sm" placeholder="ADMIN_API_KEY (legacy mode only)" />
+      </div>
+      <p id="authInfo" class="mt-2 text-xs text-slate-400"></p>
+      <p id="statusMsg" class="mt-2 text-sm"></p>
+    </section>
+
+    <section class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <article class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+        <p class="text-xs uppercase tracking-wide text-slate-400">Total Reservations</p>
+        <p id="metricReservations" class="mt-2 text-3xl font-semibold">0</p>
+      </article>
+      <article class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+        <p class="text-xs uppercase tracking-wide text-slate-400">Total Orders</p>
+        <p id="metricOrders" class="mt-2 text-3xl font-semibold">0</p>
+      </article>
+      <article class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+        <p class="text-xs uppercase tracking-wide text-slate-400">Active Orders</p>
+        <p id="metricActiveOrders" class="mt-2 text-3xl font-semibold">0</p>
+      </article>
+      <article class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+        <p class="text-xs uppercase tracking-wide text-slate-400">Today's Revenue</p>
+        <p id="metricRevenue" class="mt-2 text-3xl font-semibold">Rs.0</p>
+      </article>
+    </section>
+
+    <section class="mt-6 grid gap-6 lg:grid-cols-2">
+      <article class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+        <h2 class="mb-3 text-xl font-semibold">Reservations</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="border-b border-white/10 text-slate-300">
+                <th class="px-2 py-2">Guest</th>
+                <th class="px-2 py-2">Schedule</th>
+                <th class="px-2 py-2">Guests</th>
+                <th class="px-2 py-2">Status</th>
+                <th class="px-2 py-2">Action</th>
+              </tr>
+            </thead>
+            <tbody id="reservationRows"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="rounded-xl border border-white/10 bg-slate-900/70 p-4">
+        <h2 class="mb-3 text-xl font-semibold">Contact Messages</h2>
+        <div id="messageRows" class="space-y-3"></div>
+      </article>
+    </section>
+
+    <section class="mt-6 rounded-xl border border-white/10 bg-slate-900/70 p-4">
+      <h2 class="mb-3 text-xl font-semibold">Orders</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="border-b border-white/10 text-slate-300">
+              <th class="px-2 py-2">Order</th>
+              <th class="px-2 py-2">Items</th>
+              <th class="px-2 py-2">Total</th>
+              <th class="px-2 py-2">Status</th>
+              <th class="px-2 py-2">Action</th>
+            </tr>
+          </thead>
+          <tbody id="orderRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/admin.js?v=4" defer></script>
+</body>
+</html>

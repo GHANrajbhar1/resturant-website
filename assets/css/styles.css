@@ -1,0 +1,132 @@
+:root {
+  --glass: rgba(255, 255, 255, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(900px 400px at 0% -10%, rgba(249, 115, 22, 0.22), transparent),
+    radial-gradient(800px 300px at 100% 0%, rgba(20, 184, 166, 0.15), transparent),
+    linear-gradient(180deg, #020617 0%, #0f172a 45%, #111827 100%);
+}
+
+.hero-card {
+  animation: floatIn 0.9s ease-out;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.field {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0.7rem 0.9rem;
+  color: #e2e8f0;
+}
+
+.field:focus {
+  outline: 2px solid #fb923c;
+  outline-offset: 2px;
+}
+
+.menu-card {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: var(--glass);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.menu-card img {
+  height: 190px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.gallery-img {
+  height: 220px;
+  width: 100%;
+  border-radius: 0.9rem;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.25s ease;
+}
+
+.gallery-img:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.quote-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--glass);
+  border-radius: 0.9rem;
+  padding: 1rem;
+  color: #e2e8f0;
+}
+
+.quote-card span {
+  display: block;
+  margin-top: 0.8rem;
+  color: #fdba74;
+  font-size: 0.9rem;
+}
+
+.cart-open #cartDrawer {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.cart-open #overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast-item {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 23, 42, 0.96);
+  color: #e2e8f0;
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.88rem;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.25s ease;
+}
+
+.toast-success {
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.toast-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.toast-hide {
+  transform: translateY(6px);
+  opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .gallery-img {
+    height: 180px;
+  }
+}

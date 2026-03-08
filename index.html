@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Modern responsive restaurant website with menu, reservations, ordering, and contact." />
+  <meta name="theme-color" content="#111827" />
+  <title>SpiceRoot | Restaurant</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ["Playfair Display", "serif"],
+            sans: ["Plus Jakarta Sans", "sans-serif"]
+          },
+          colors: {
+            brand: {
+              50: "#fff8ef",
+              100: "#ffe8cc",
+              500: "#f97316",
+              700: "#c2410c",
+              900: "#7c2d12"
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <div class="page-bg"></div>
+
+  <header class="fixed top-0 z-50 w-full border-b border-white/10 bg-slate-950/85 backdrop-blur">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+      <a href="#home" class="text-2xl font-display tracking-wide text-brand-100">SpiceRoot</a>
+      <button id="menuBtn" class="md:hidden rounded border border-white/20 px-3 py-1.5 text-sm">Menu</button>
+      <ul id="navLinks" class="hidden gap-6 text-sm font-medium md:flex">
+        <li><a href="#menu" class="hover:text-brand-100">Menu</a></li>
+        <li><a href="#reservations" class="hover:text-brand-100">Reservations</a></li>
+        <li><a href="#gallery" class="hover:text-brand-100">Gallery</a></li>
+        <li><a href="#contact" class="hover:text-brand-100">Contact</a></li>
+      </ul>
+      <button id="cartBtn" class="hidden sm:inline-flex rounded bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">Cart (0)</button>
+    </nav>
+    <div id="mobileNav" class="hidden border-t border-white/10 bg-slate-900/95 p-4 md:hidden">
+      <div class="flex flex-col gap-3 text-sm">
+        <a href="#menu">Menu</a>
+        <a href="#reservations">Reservations</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <button id="cartBtnMobile" class="rounded bg-brand-500 px-4 py-2 text-left text-sm font-semibold text-white">Cart (0)</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="mx-auto max-w-7xl px-4 pb-24 pt-28 sm:px-6">
+    <section class="grid items-center gap-8 lg:grid-cols-2">
+      <div class="space-y-5">
+        <p class="inline-flex rounded-full border border-brand-100/40 bg-brand-100/10 px-3 py-1 text-xs text-brand-100">Fine Dining. Fast Delivery.</p>
+        <h1 class="text-4xl font-display leading-tight sm:text-5xl">Crafted Flavors, Warm Hospitality, Memorable Nights.</h1>
+        <p class="max-w-xl text-slate-300">Enjoy chef-curated dishes, instant table booking, and smooth online ordering experience across desktop and mobile.</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#menu" class="rounded bg-brand-500 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700">Explore Menu</a>
+          <a href="#reservations" class="rounded border border-white/20 px-5 py-3 text-sm font-semibold hover:bg-white/10">Book a Table</a>
+        </div>
+      </div>
+      <div class="hero-card rounded-2xl border border-white/15 p-2 shadow-2xl shadow-brand-900/40">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="Restaurant food plate" class="h-[420px] w-full rounded-xl object-cover" />
+      </div>
+    </section>
+
+    <section id="menu" class="mt-16">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="text-3xl font-display">Our Menu</h2>
+          <p class="text-slate-300">Fresh ingredients, daily prepared.</p>
+        </div>
+        <div id="categoryFilters" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div id="menuGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <section id="reservations" class="mt-16 grid gap-8 rounded-2xl border border-white/10 bg-white/5 p-6 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-display">Reserve Your Table</h2>
+        <p class="mt-2 text-slate-300">Open daily: 12:00 PM - 11:00 PM</p>
+        <ul class="mt-4 space-y-2 text-sm text-slate-200">
+          <li>Private dining available for events</li>
+          <li>Instant confirmation on submission</li>
+          <li>Family and corporate bookings welcome</li>
+        </ul>
+      </div>
+      <form id="reservationForm" class="space-y-3">
+        <div class="grid gap-3 sm:grid-cols-2">
+          <input required name="name" placeholder="Your Name" class="field" />
+          <input required type="tel" name="phone" placeholder="Phone Number" class="field" />
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <input required type="date" name="date" class="field" />
+          <input required type="time" name="time" class="field" />
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <input required type="number" min="1" max="20" name="guests" placeholder="Guests" class="field" />
+          <input name="occasion" placeholder="Occasion (Optional)" class="field" />
+        </div>
+        <button class="rounded bg-brand-500 px-4 py-2 font-semibold hover:bg-brand-700" type="submit">Confirm Reservation</button>
+        <p id="reservationMsg" class="text-sm"></p>
+      </form>
+    </section>
+
+    <section id="gallery" class="mt-16">
+      <h2 class="text-3xl font-display">Gallery</h2>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <img loading="lazy" class="gallery-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=70" alt="Restaurant interior" />
+        <img loading="lazy" class="gallery-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=70" alt="Dish plating" />
+        <img loading="lazy" class="gallery-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=70" alt="Dining setup" />
+        <img loading="lazy" class="gallery-img" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=800&q=70" alt="Chef preparing dish" />
+      </div>
+    </section>
+
+    <section class="mt-16 rounded-2xl border border-white/10 bg-white/5 p-6">
+      <h2 class="text-3xl font-display">What Guests Say</h2>
+      <div class="mt-5 grid gap-4 md:grid-cols-3">
+        <article class="quote-card">"Best biryani and ambiance in town. Booking process was super easy."<span>Riya S.</span></article>
+        <article class="quote-card">"Fast delivery, still hot, and incredible flavors. Highly recommend."<span>Arjun M.</span></article>
+        <article class="quote-card">"Premium experience without being overpriced. Service is excellent."<span>Nina K.</span></article>
+      </div>
+    </section>
+
+    <section id="contact" class="mt-16 grid gap-8 rounded-2xl border border-white/10 bg-white/5 p-6 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-display">Contact Us</h2>
+        <p class="mt-2 text-slate-300">221B Food Street, Mumbai, India</p>
+        <p class="text-slate-300">+91 98765 43210 | hello@spiceroot.com</p>
+        <iframe class="mt-4 h-56 w-full rounded-xl border-0" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Mumbai%20India&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Map"></iframe>
+      </div>
+      <form id="contactForm" class="space-y-3">
+        <input required name="name" placeholder="Your Name" class="field" />
+        <input required type="email" name="email" placeholder="Email" class="field" />
+        <textarea required name="message" placeholder="Message" rows="5" class="field"></textarea>
+        <button class="rounded bg-brand-500 px-4 py-2 font-semibold hover:bg-brand-700" type="submit">Send Message</button>
+        <p id="contactMsg" class="text-sm"></p>
+      </form>
+    </section>
+  </main>
+
+  <aside id="cartDrawer" class="pointer-events-none fixed inset-y-0 right-0 z-[60] w-full max-w-md translate-x-full border-l border-white/10 bg-slate-900 p-5 transition duration-300">
+    <div class="flex items-center justify-between">
+      <h3 class="text-2xl font-display">Your Order</h3>
+      <button id="closeCart" class="rounded border border-white/20 px-3 py-1.5">Close</button>
+    </div>
+    <div id="cartItems" class="mt-4 space-y-2"></div>
+    <div class="mt-5 border-t border-white/10 pt-4">
+      <p class="flex justify-between"><span>Total</span><span id="cartTotal">Rs.0</span></p>
+      <button id="checkoutBtn" class="mt-4 w-full rounded bg-brand-500 px-4 py-2 font-semibold hover:bg-brand-700">Pay Online</button>
+      <div class="mt-2 grid gap-2 sm:grid-cols-2">
+        <button id="upiBtn" class="rounded border border-emerald-400/50 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20">Pay via UPI (Free)</button>
+        <button id="codBtn" class="rounded border border-cyan-400/50 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-200 hover:bg-cyan-500/20">Place COD Order</button>
+      </div>
+      <p id="paymentMsg" class="mt-2 text-xs text-slate-400"></p>
+      <div id="configPanel" class="mt-2 hidden rounded-lg border border-amber-400/40 bg-amber-500/10 p-2 text-xs text-amber-100">
+        <p class="font-semibold">Server setup required:</p>
+        <ul id="configList" class="mt-1 list-disc pl-4"></ul>
+      </div>
+    </div>
+  </aside>
+  <div id="overlay" class="pointer-events-none fixed inset-0 z-40 bg-black/60 opacity-0 transition"></div>
+  <div id="toastWrap" class="fixed bottom-4 right-4 z-[80] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2"></div>
+
+  <footer class="border-t border-white/10 px-4 py-6 text-center text-sm text-slate-300">
+    <p>&copy; <span id="year"></span> SpiceRoot. All rights reserved. <a href="/admin" class="underline hover:text-brand-100">Admin</a></p>
+  </footer>
+
+  <script src="assets/js/data.js?v=3" defer></script>
+  <script src="assets/js/app.js?v=4" defer></script>
+</body>
+</html>
